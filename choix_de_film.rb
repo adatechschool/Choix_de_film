@@ -12,6 +12,8 @@ x = table.length
 x -= 1
 y = rand(0..x)
 puts table[y][0]
+
+movie = table[y][0]
 table[y].delete_at(0)
 
 if table[y].length == 0
@@ -30,4 +32,8 @@ CSV.open(file, "w")  do |csv|
   table.each do |item|
     csv << item
   end
+end
+
+CSV.open("#{File.expand_path File.dirname(__FILE__)}/vu.csv", "a") do |csv|
+	csv << [movie]
 end
