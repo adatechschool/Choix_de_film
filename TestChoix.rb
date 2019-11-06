@@ -9,11 +9,11 @@ x = table.length
 x -= 1
 y = rand(0..x)
 movie = table [y][0]
-	
+
 puts "Vous-voulez voir " + movie + " ?"
 answer = gets.strip!
 if answer == "oui"
-	puts "Oh yeah!!!".green
+	puts "Oh yeah!!! ( ͡° ͜ʖ ͡°)".green
 	table[y].delete_at(0)
 	if table[y].length == 0
 		table.delete_at(y)
@@ -28,6 +28,7 @@ if answer == "oui"
 		y += 1
 	end
 =end
+
 =begin
 	CSV.open(avoir, "w") do |csv|
 		table.each do |item|
