@@ -1,5 +1,4 @@
 require 'csv'
-require 'colorize'
 
 class Info
 	def initialize(table)
