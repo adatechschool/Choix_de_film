@@ -1,7 +1,7 @@
 Film,Genre,Lead Studio,Audience score %,Profitability,Rotten Tomatoes %,Worldwide Gross,Year
 Zack and Miri Make a Porno,Romance,The Weinstein Company,70,1.747541667,64,$41.94 ,2008
 Youth in Revolt,Comedy,The Weinstein Company,52,1.09,68,$19.62 ,2010
-You Will Meet a Tall Dark Stranger,Comedy,Independent,35,1.211818182,43,$26.66 ,2010
+You Will Meet a  Tall Dark Stranger,Comedy,Independent,35,1.211818182,43,$26.66 ,2010
 When in Rome,Comedy,Disney,44,0,15,$43.04 ,2010
 What Happens in Vegas,Comedy,Fox,72,6.267647029,28,$219.37 ,2008
 Water For Elephants,Drama,20th Century Fox,72,3.081421053,60,$117.09 ,2011
@@ -24,7 +24,6 @@ The Back-up Plan,Comedy,CBS,47,2.202571429,20,$77.09 ,2010
 Tangled,Animation,Disney,88,1.365692308,89,$355.01 ,2010
 Something Borrowed,Romance,Independent,48,1.719514286,15,$60.18 ,2011
 She's Out of My League,Comedy,Paramount,60,2.4405,57,$48.81 ,2010
-Sex and the City Two,Comedy,Warner Bros.,49,2.8835,15,$288.35 ,2010
 Sex and the City 2,Comedy,Warner Bros.,49,2.8835,15,$288.35 ,2010
 Sex and the City,Comedy,Warner Bros.,81,7.221795791,49,$415.25 ,2008
 Remember Me,Drama,Summit,70,3.49125,28,$55.86 ,2010
@@ -44,7 +43,6 @@ Monte Carlo,Romance,20th Century Fox,50,1.9832,38,$39.66 ,2011
 Miss Pettigrew Lives for a Day,Comedy,Independent,70,0.2528949,78,$15.17 ,2008
 Midnight in Paris,Romence,Sony,84,8.744705882,93,$148.66 ,2011
 Marley and Me,Comedy,Fox,77,3.746781818,63,$206.07 ,2008
-Mamma Mia!,Comedy,Universal,76,9.234453864,53,$609.47 ,2008
 Mamma Mia!,Comedy,Universal,76,9.234453864,53,$609.47 ,2008
 Made of Honor,Comdy,Sony,61,2.64906835,13,$105.96 ,2008
 Love Happens,Drama,Universal,40,2.004444444,18,$36.08 ,2009
