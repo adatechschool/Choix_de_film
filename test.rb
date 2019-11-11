@@ -110,25 +110,59 @@ class Sort_stats
       end
     end
 
-    header = "0--".ljust(5) + "Genre".ljust(15) + "Film".ljust(40) + "Audience Score in %".ljust("Audience Score in %".length + 7) + "Profitability in %".ljust("Profitability in %".length + 5) + "Rotten Tomatoes in %" + "\n"
+    header = "0--".ljust(5) + "Genre".ljust(15) + "Film".ljust(40) + "Audience Score in %".ljust("Audience Score in %".length + 7) + "Profitability in %".ljust("Profitability in %".length + 5) + "Rotten Tomatoes in %".ljust("Rotten Tomatoes in %".length + 5) + "Worldwide Gross".ljust("Worldwide Gross".length + 5) + "Year\n"
     puts header
     puts "-"*header.length
     counter = 1
+    #sort_type char = normal, int = reverse
     studio_array.sort_by!{ |x| x[sort_type]}.reverse!
     studio_array.each do |x|
       if counter < 10
-        puts "#{counter}---".ljust(5) + x["Genre"].ljust(15) + x["Film"].ljust(40) + "#{x["Audience Score"].to_i}" + "%".ljust("Audience Score in %".length + 5) + "#{x["Profitability"].to_f.round(3)}%".ljust("Profitability in %".length + 5) + "#{x["Rotten Tomatoes"].to_i}%" + "#{x["Worldwide Gross"].to_f.round(3)}." + x["Year"]
+        puts "#{counter}---".ljust(5) + x["Genre"].ljust(15) + x["Film"].ljust(40) + "#{x["Audience Score"].to_i}" + "%".ljust("Audience Score in %".length + 5) + "#{x["Profitability"].to_f.round(3)}%".ljust("Profitability in %".length + 5) + "#{x["Rotten Tomatoes"].to_i}%".ljust("Rotten Tomatoes in %".length + 5) + "$#{x["Worldwide Gross"].to_f.round(3)}".ljust("Worldwide Gross".length + 5) + x["Year"]
         counter += 1
       elsif counter > 9
-        puts "#{counter}--".ljust(5) + x["Genre"].ljust(15) + x["Film"].ljust(40) + "#{x["Audience Score"].to_i}" + "%".ljust("Audience Score in %".length + 5) + "#{x["Profitability"].to_f.round(3)}%".ljust("Profitability in %".length + 5) + "#{x["Rotten Tomatoes"].to_i}%" + "#{x["Worldwide Gross"].to_f.round(3)}" + x["Year"]
+        puts "#{counter}--".ljust(5) + x["Genre"].ljust(15) + x["Film"].ljust(40) + "#{x["Audience Score"].to_i}" + "%".ljust("Audience Score in %".length + 5) + "#{x["Profitability"].to_f.round(3)}%".ljust("Profitability in %".length + 5) + "#{x["Rotten Tomatoes"].to_i}%".ljust("Rotten Tomatoes in %".length + 5) + "$#{x["Worldwide Gross"].to_f.round(3)}".ljust("Worldwide Gross".length + 5) + x["Year"]
         counter += 1
       end
     end
   end
 
-  def sort_all(sort_type, asc_or_desc)
+  def sort_all(csv, sort_type)
     #Sortierungen die auf alle Studios angewendet werden
+    std_array = []
+    i = 0
+
+    csv.each do |x|
+      csv[i] = Movies.new(csv[i][0..-1])
+      std_array << csv[i].hash()
+      i += 1
+    end
+
+    header = "0--".ljust(5) + "Genre".ljust(15) + "Film".ljust(40) + "Audience Score in %".ljust("Audience Score in %".length + 7) + "Profitability in %".ljust("Profitability in %".length + 5) + "Rotten Tomatoes in %".ljust("Rotten Tomatoes in %".length + 5) + "Worldwide Gross".ljust("Worldwide Gross".length + 5) + "Year\n"
+    puts header
+    puts "-"*header.length
+    counter = 1
+    #sort_type char = normal, int = reverse
+    std_array.sort_by!{ |x| x[sort_type]}.reverse!
+    std_array.each do |x|
+      if counter < 10
+        puts "#{counter}---".ljust(5) + x["Genre"].ljust(15) + x["Film"].ljust(40) + "#{x["Audience Score"].to_i}" + "%".ljust("Audience Score in %".length + 5) + "#{x["Profitability"].to_f.round(3)}%".ljust("Profitability in %".length + 5) + "#{x["Rotten Tomatoes"].to_i}%".ljust("Rotten Tomatoes in %".length + 5) + "$#{x["Worldwide Gross"].to_f.round(3)}".ljust("Worldwide Gross".length + 5) + x["Year"]
+        counter += 1
+      elsif counter > 9
+        puts "#{counter}--".ljust(5) + x["Genre"].ljust(15) + x["Film"].ljust(40) + "#{x["Audience Score"].to_i}" + "%".ljust("Audience Score in %".length + 5) + "#{x["Profitability"].to_f.round(3)}%".ljust("Profitability in %".length + 5) + "#{x["Rotten Tomatoes"].to_i}%".ljust("Rotten Tomatoes in %".length + 5) + "$#{x["Worldwide Gross"].to_f.round(3)}".ljust("Worldwide Gross".length + 5) + x["Year"]
+        counter += 1
+      end
+    end
   end
+end
+
+i = 0
+studio_name = []
+csv.each do |x|
+  if studio_name.include?(csv[i][2]) == false
+    studio_name << csv[i][2]
+  end
+  i += 1
 end
 
 sorting = Sort_stats.new
@@ -136,58 +170,48 @@ sorting = Sort_stats.new
 while true
   print "Do you want to inspect [1] everything or only a [2] specific studio: "
   scope = gets.chomp.to_i
-  case scope
-  when 2
-    print "Enter the studio you want to inspect: "
-    studio = gets.chomp
-    print "Enter the characteristic you want to sort: "
-    sort = gets.chomp
-    puts ""
-    sorting.sort_studio(studio, csv, sort)
+  if [1, 2].include?(scope)
+    case scope
+    when 1
+      puts "Valid characteristic are: [Genre] [Film] [Audience Score] [Profitability] [Rotten Tomatoes] [Worldwide Gross] [Year]."
+      print "Enter the characteristic you want to sort: "
+      sort = gets.chomp
+      if ["Genre", "Film", "Audience Score", "Profitability", "Rotten Tomatoes", "Worldwide Gross", "Year"].include?(sort)
+        sorting.sort_all(csv, sort)
+      else
+        puts "#{sort} is not a valid characteristic."
+        next
+      end
+    when 2
+      print "Valid studio names are: "
+      studio_name.each do |x|
+        print "[#{x}] "
+      end
+      print ".\n"
+      print "Enter the studio you want to inspect: "
+      studio = gets.chomp
+      if studio_name.include?(studio)
+        puts "Valid characteristic are: [Genre] [Film] [Audience Score] [Profitability] [Rotten Tomatoes] [Worldwide Gross] [Year]."
+        print "Enter the characteristic you want to sort: "
+        sort = gets.chomp
+        if ["Genre", "Film", "Audience Score", "Profitability", "Rotten Tomatoes", "Worldwide Gross", "Year"].include?(sort)
+          sorting.sort_studio(studio, csv, sort)
+        else
+          puts "#{sort} is not a valid characteristic."
+          next
+        end
+      else
+        puts "#{studio} is not a valid studio."
+        next
+      end
+    end
+  else
+    puts "#{scope} is not a valid decision."
+    next
   end
-  print "\nIf you want to exit enter [x]: "
+  print "\nIf you want to exit type [x] else press [enter]: "
   exit = gets.chomp
   if exit == "x"
     break
   end
 end
-
-
-
-
-=begin
-i = 0
-std_array = []
-studio_array = []
-stats_array = []
-
-#create array of hashes from the csv file
-csv.each do |x|
-  csv[i] = Movies.new(csv[i][0..-1])
-  std_array << csv[i].hash()
-  i += 1
-end
-
-
-
-
-# array mit allen Studionamen
-std_array.each do |x|
-  if studio_array.include?(x.fetch("Lead Studio")) == false
-    studio_array.push(x.fetch("Lead Studio"))
-  end
-end
-
-studio_array.each do |x|
-  prof = Calc_stats.new(std_array, x)
-  stats_array << prof.return_stats()
-end
-
-
-#array von allen Filmen
-puts std_array
-#array der stats pro Studio, um Durchschnitt >> stats/movie_count
-puts stats_array
-#array der Studios
-#puts studio_array
-=end
